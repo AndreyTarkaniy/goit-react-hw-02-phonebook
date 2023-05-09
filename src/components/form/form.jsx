@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 
 class Form extends Component {
   state = {
     name: '',
     number: '',
   };
+
+  nameId = nanoid();
+  numberId = nanoid();
 
   reset = () => {
     this.setState({ name: '', number: '' });
@@ -14,7 +18,7 @@ class Form extends Component {
     event.preventDefault();
     // console.log(this.state);
 
-    this.props.onSubmitFromForm(this.state);
+    this.props.onSubmitForm(this.state);
 
     this.reset();
   };
@@ -32,9 +36,10 @@ class Form extends Component {
           <input
             type="text"
             name="name"
-            // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Назва може містити лише літери, апостроф, тире та пробіли. Наприклад Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
+            id={this.nameId}
             value={this.state.name}
             onChange={this.handleChange}
           />
@@ -45,9 +50,10 @@ class Form extends Component {
           <input
             type="tel"
             name="number"
-            // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Номер телефону має складатися з цифр і може містити пробіли, тире, круглі дужки та починатися з +"
             required
+            id={this.numberId}
             value={this.state.number}
             onChange={this.handleChange}
           />
