@@ -16,7 +16,6 @@ class Form extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // console.log(this.state);
 
     this.props.onSubmitForm(this.state);
 
@@ -31,7 +30,7 @@ class Form extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="">
+        <label>
           Name
           <input
             type="text"
@@ -45,7 +44,7 @@ class Form extends Component {
           />
         </label>
 
-        <label htmlFor="">
+        <label>
           Number
           <input
             type="tel"
