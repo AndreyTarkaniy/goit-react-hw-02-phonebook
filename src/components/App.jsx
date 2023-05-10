@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Container } from 'components/container/container';
 import Form from 'components/form/form';
-import Contacts from 'components/contacts/contacts';
+import ContactsList from 'components/contactsList/contactsList';
 import Filter from 'components/filter/filter';
 
 export class App extends Component {
@@ -54,6 +54,14 @@ export class App extends Component {
     );
   };
 
+  deleteContact = contactId => {
+    // const { contacts } = this.state;
+
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contactId !== contact.id),
+    }));
+  };
+
   render() {
     const { filter } = this.state;
     const contacts = this.filterContact();
@@ -65,7 +73,7 @@ export class App extends Component {
 
         <h2>Contacts</h2>
         <Filter value={filter} onChangeFilter={this.changeFilter} />
-        <Contacts contacts={contacts} />
+        <ContactsList contacts={contacts} onDelete={this.deleteContact} />
       </Container>
     );
   }
