@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import css from 'components/filter/filter.module.css';
 
 const Filter = ({ value, onChangeFilter }) => {
@@ -16,3 +18,8 @@ const Filter = ({ value, onChangeFilter }) => {
 };
 
 export default Filter;
+
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChangeFilter: PropTypes.func.isRequired,
+};
