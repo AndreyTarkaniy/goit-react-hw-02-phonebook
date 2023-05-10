@@ -16,17 +16,26 @@ export class App extends Component {
     filter: '',
   };
 
-  addContact = contactData => {
-    const { name, number } = contactData;
+  addContact = contactDataForm => {
+    const { name, number } = contactDataForm;
 
-    const contact = {
+    const existContact = this.state.contacts.find(
+      contact => name.toLowerCase() === contact.name.toLowerCase()
+    );
+
+    if (existContact) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
+    const newContact = {
       id: nanoid(),
       name: name,
       number: number,
     };
 
     this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts],
+      contacts: [newContact, ...prevState.contacts],
     }));
   };
 
@@ -51,7 +60,10 @@ export class App extends Component {
 
     return (
       <Container>
+        <h1>Phonebook</h1>
         <Form onSubmitForm={this.addContact} />
+
+        <h2>Contacts</h2>
         <Filter value={filter} onChangeFilter={this.changeFilter} />
         <Contacts contacts={contacts} />
       </Container>
